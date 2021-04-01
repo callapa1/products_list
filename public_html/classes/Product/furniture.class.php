@@ -1,7 +1,5 @@
 <?php
 
-namespace Product;
-
 include_once 'product.class.php';
 
 Class Furniture extends Product {
@@ -11,20 +9,28 @@ Class Furniture extends Product {
     public $width;
     public $length;
 
-    public function __construct($sku, $name, $price, $height, $width, $length){
-        parent::__construct($sku, $name, $price);
+    public function __construct($data){
+        $sku    = strtoupper($data['sku']);
+        $name   = $data['name'];
+        $price  = $data['price'];
+        $height = $data['furn_height'];
+        $width  = $data['furn_width'];
+        $length = $data['furn_length'];
+        parent::__construct($sku, $name, $price, $this->type_id, $this->type);
+
         $this->height = $height;
         $this->width  = $width;
         $this->length = $length;
-
-        insertProduct($sku, $name, $price, $this->type_id, $this->type);
-        $this->insertFurniture($height, $width, $length);
+        $this->insertIntoDB();
     }
 
-    private function insertFurniture($height, $width, $length){
-        $product_id = findLastID();
+    private function insertIntoDB(){
+        $product_id = DbHelper::findLastID();
 
-        $furniture_sql = "INSERT INTO furniture (height, width, length, product_id) VALUES ($height, $width, $length, $product_id)";
+        $furniture_sql = "INSERT INTO furniture (height, width, length, product_id) VALUES ($this->height,
+                                                                                            $this->width,
+                                                                                            $this->length,
+                                                                                            $product_id)";
         $GLOBALS['conn']->query($furniture_sql);
         $GLOBALS['conn']->close();
     }

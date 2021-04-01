@@ -37,8 +37,8 @@
             <form id="delete_form" action="delete_items.php" method="post">
                 <div class="row justify-content-start">
                     <?php
-                    include 'functions.php';
-                    showProducts();
+                    include './helpers/view_methods.php';
+                    ViewMethods::showProducts();
                     ?>
                 </div>
             </form>
