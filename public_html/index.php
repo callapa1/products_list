@@ -43,9 +43,6 @@
                 </div>
             </form>
         </div>
-
-        <hr />
-        <div class="row justify-content-center">Scandiweb Test assignment</div>
     </div>
 </body>
 </html>
