@@ -8,7 +8,6 @@
 </head>
 <body>
     <?php
-    // include_once 'includes/autoload.inc.php';
     include_once './classes/model.class.php';
     $model = new Model();
     $insert = $model->insert();
